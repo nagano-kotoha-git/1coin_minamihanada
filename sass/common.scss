@@ -1,0 +1,39 @@
+/* 色の変数設定 */
+$main-color: #FA4389;
+$hover-color: #d71a62;
+$text-color: #333333;
+$point-color: #FED800;
+
+html,
+body {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+    font-family: "Noto Sans JP", sans-serif;
+    overflow-x: clip
+}
+
+:root {
+    --header-h: 80px;
+}
+
+body {
+    padding-top: var(--header-h);
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.visuallyhidden {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+    clip-path: inset(0px 0px 99.9% 99.9%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    border: 0;
+}

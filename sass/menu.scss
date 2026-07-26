@@ -1,0 +1,127 @@
+/* =========================
+    色変数
+========================= */
+@use "common" as *;
+
+@media (max-width: 767px) {
+    /*========= ナビゲーションのためのCSS ===============*/
+
+    #g-nav {
+        position: fixed;
+        z-index: 2000;
+
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: $main-color;
+
+        /* ★閉じてる時：transformで画面外へ（横幅に影響しにくい） */
+        transform: translateX(120%);
+        transition: transform 0.6s ease;
+
+        /* ★横にはみ出す要素をクリップ */
+        overflow-x: hidden;
+
+        /* アクティブクラスがついたら表示 */
+        &.panelactive {
+            transform: translateX(0);
+
+            /* ナビゲーションの縦スクロール */
+            #g-nav-list {
+                position: fixed;
+                z-index: 999;
+                width: 100%;
+                height: 100vh;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* ナビゲーション */
+        ul {
+            width: 100%;
+            position: absolute;
+            z-index: 999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* リストのレイアウト設定 */
+        li {
+            list-style: none;
+            text-align: left;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+                padding: 24px;
+                display: block;
+                letter-spacing: 0.1em;
+                font-weight: 600;
+                font-size: 16px;
+
+                /* ★長文で横に伸びるのを防ぐ保険 */
+                white-space: normal;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+        }
+    }
+
+    /*========= ボタンのためのCSS ===============*/
+    .openbtn {
+        position: fixed;
+        z-index: 9999;
+        // top: ;
+        right: 10px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+
+        span {
+            display: inline-block;
+            transition: all 0.4s;
+            position: absolute;
+            left: 12px;
+            height: 2px;
+            background-color: #fff;
+            width: 60%;
+
+            &:nth-of-type(1) {
+                top: 15px;
+            }
+
+            &:nth-of-type(2) {
+                top: 25px;
+            }
+
+            &:nth-of-type(3) {
+                top: 35px;
+            }
+        }
+
+        &.active {
+            span {
+                &:nth-of-type(1) {
+                    top: 18px;
+                    left: 12px;
+                    transform: translateY(6px) rotate(-45deg);
+                    width: 60%;
+                }
+
+                &:nth-of-type(2) {
+                    opacity: 0;
+                }
+
+                &:nth-of-type(3) {
+                    top: 30px;
+                    left: 12px;
+                    transform: translateY(-6px) rotate(45deg);
+                    width: 60%;
+                }
+            }
+        }
+    }
+}

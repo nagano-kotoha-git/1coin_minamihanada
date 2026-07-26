@@ -1,0 +1,510 @@
+/* =========================
+    色変数
+========================= */
+@use "common" as *;
+
+/* =========================
+   BUTTON（共通）
+========================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(70vw, 360px);
+    height: 72px;
+    padding: 0 32px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background: $point-color;
+    color: #fff;
+}
+
+/* =========================
+    HERO（SP）
+========================= */
+.hero {
+    margin-bottom: 5rem;
+    position: relative;
+    height: 35vh;
+    min-height: 220px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    // 背景ズーム用
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        // background: url("../img/crew_top.jpg") center / cover no-repeat;
+        transform: scale(1.08);
+        animation: hero-bg 6s ease-out forwards;
+        z-index: 0;
+    }
+
+    // 暗幕（既存）
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1;
+    }
+
+    h1 {
+        position: relative;
+        z-index: 2;
+        padding: 0 12px;
+
+        color: #fff;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 1.3;
+        letter-spacing: 0.05em;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+        opacity: 0;
+        transform: translateY(10px); // ← 18px → 10px
+        animation: hero-title 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: 0.6s;
+    }
+}
+
+// 背景ズーム
+@keyframes hero-bg {
+    to {
+        transform: scale(1);
+    }
+}
+
+// タイトル表示
+@keyframes hero-title {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// アニメーション
+@keyframes heroFadeZoom {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+    VOICE TITLE（SP）
+========================= */
+.voice {
+    .voice_inner {
+        margin-bottom: 3.2rem;
+        text-align: center;
+
+        .voice_title {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+
+            color: $main-color;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            white-space: nowrap; // 1行保証（保険）
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 2px;
+                height: 100%;
+                background: $main-color;
+            }
+
+            &::before {
+                left: -6px;
+                transform: rotate(-20deg);
+            }
+
+            &::after {
+                right: -6px;
+                transform: rotate(20deg);
+            }
+        }
+    }
+
+    .voice_card {
+        margin-bottom: 12rem;
+        padding: 0 2rem;
+
+        .voice_image {
+            position: relative;
+
+            img {
+                width: 100%;
+                display: block;
+                border-radius: 3px;
+            }
+
+            .voice_profile {
+                width: 95%;
+                position: absolute;
+                left: -8px;
+                bottom: -60px;
+
+                padding: 16px;
+                background: $main-color;
+                color: #fff;
+                letter-spacing: 0.03em;
+                border-radius: 3px;
+
+                &_lead {
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    margin-bottom: 0.8rem;
+                }
+
+                &_name {
+                    font-size: 18px;
+                    font-weight: 500;
+                    letter-spacing: 0.05em;
+
+                    span {
+                        font-size: 14px;
+                        font-weight: 500;
+                        letter-spacing: 0.03em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* =========================
+  REVEAL ANIMATION（VOICE専用）
+========================= */
+
+.js-reveal-title {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 1s ease-out,
+        transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &.is-show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// カード：少し遅れて出す（タイトルより後）
+.js-reveal-card {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+
+    &.is-show {
+        opacity: 1;
+        transform: translateY(0);
+
+        // 青いプロフィール帯はさらに遅れて“横からスッ”
+        .voice_profile {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .voice_profile {
+        opacity: 0;
+        transform: translateX(-12px);
+        transition: opacity 0.7s ease 0.45s, transform 0.7s ease 0.45s;
+    }
+}
+
+.voice_qa {
+    padding: 0 1.4rem;
+
+    .voice_qa_item {
+        margin-bottom: 6rem;
+        padding: 20px 18px;
+        border: 2px solid $main-color;
+        border-radius: 3px;
+
+        .voice_qa_question {
+            margin-bottom: 1.4rem;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.6;
+            color: $main-color;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.8;
+            letter-spacing: 0.03em;
+            color: $text-color;
+
+            span {
+                color: $main-color;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+/* =========================
+    QA STAGGER（各カードが順番に出る）
+========================= */
+.js-stagger {
+    .voice_qa_item {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        will-change: opacity, transform;
+
+        &.is-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.cta {
+    position: relative;
+    margin: 3rem 0;
+    width: 100%;
+    padding: 16rem 0 3rem 0;
+    overflow: hidden;
+
+    /* =========================
+       ① 背景画像（最初にふわっと表示）
+    ========================= */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        // background: url("../img/cta_dummy.jpg") center / cover no-repeat;
+        opacity: 0;
+        /* ←最初は見せない */
+        transform: scale(1.03);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* =========================
+       ② 白膜＋上下フェード
+    ========================= */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            /* 全体をうっすら白く */
+            linear-gradient(rgba(255, 255, 255, 0.65),
+                rgba(255, 255, 255, 0.65)),
+            /* 上下グラデーション */
+            linear-gradient(to bottom,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0) 70%,
+                rgba(255, 255, 255, 1) 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* =========================
+       コンテンツ
+    ========================= */
+    .cta_inner {
+        position: relative;
+        z-index: 2;
+
+        .cta_kicker {
+            margin-bottom: 1.4rem;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+            color: $text-color;
+
+            span {
+                color: $main-color;
+            }
+        }
+
+        .cta_text {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            color: $text-color;
+            margin-bottom: 2.2rem;
+        }
+
+        /* 元の青背景は消す */
+        .cta_bar {
+            margin-bottom: 2rem;
+            display: inline-block;
+            background: transparent;
+            border-radius: 0 2px 2px 0;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .cta_note {
+            margin-bottom: 4rem;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: $text-color;
+        }
+
+        .cta_kicker,
+        .cta_text,
+        .cta_note {
+            padding: 0 16px;
+        }
+
+        .cta_btn-wrap {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    /* =========================
+       初期状態
+    ========================= */
+    .js-cta-kicker,
+    .js-cta-text,
+    .js-cta-note,
+    .js-cta-btn {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    /* 青帯ワイプ */
+    .js-cta-bar {
+        position: relative;
+        display: inline-block;
+        padding: 16px 16px;
+        overflow: hidden;
+        border-radius: 0 2px 2px 0;
+
+        span {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(6px);
+            display: inline-block;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: $main-color;
+            transform: scaleX(0);
+            transform-origin: left;
+            z-index: 1;
+        }
+    }
+
+    /* =========================
+       is-show で一連のアニメ開始
+    ========================= */
+    &.is-show {
+
+        /* ① 背景画像 ふわっ */
+        &::before {
+            animation: ctaBgFade 0.9s ease-out forwards;
+        }
+
+        /* ② テキスト */
+        .js-cta-kicker {
+            animation: ctaFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.9s;
+        }
+
+        .js-cta-text {
+            animation: ctaFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 1.15s;
+        }
+
+        /* ③ 青帯 */
+        .js-cta-bar::before {
+            animation: ctaBarWipe 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 1.45s;
+        }
+
+        .js-cta-bar span {
+            animation: ctaFadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 1.65s;
+        }
+
+        /* ④ 最後のテキスト */
+        .js-cta-note {
+            animation: ctaFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 1.95s;
+        }
+
+        /* ⑤ ボタン */
+        .js-cta-btn {
+            animation: ctaFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 2.2s;
+        }
+    }
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes ctaBgFade {
+    from {
+        opacity: 0;
+        transform: scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes ctaFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ctaBarWipe {
+    to {
+        transform: scaleX(1);
+    }
+}

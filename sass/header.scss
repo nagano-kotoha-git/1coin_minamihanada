@@ -1,0 +1,53 @@
+/* =========================
+    HEADER（SP）
+========================= */
+@use "common" as *;
+
+header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1000;
+
+    /* SPは最初から青にする（白チラ防止） */
+    background: $main-color;
+
+    /* ★SPではワイプ用レイヤー自体を出さない */
+    &::before {
+        content: none;
+    }
+
+    #header-top {
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+
+        /* ★SPはフェードも無し（常に表示） */
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    /* ===== ロゴ＋会社名 ===== */
+    .header__brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+
+        img {
+            max-width: 240px;
+            height: auto;
+        }
+    }
+}
+
+.pc {
+    display: none;
+}
+
+.sp {
+    display: block;
+}

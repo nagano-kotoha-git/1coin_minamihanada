@@ -1,0 +1,93 @@
+/* =========================
+    色変数
+========================= */
+@use "common" as *;
+
+.footer {
+    background: $main-color;
+    color: #fff;
+    padding-top: 4rem;
+
+    .footer_inner {
+        margin: 0 auto;
+        padding: 0 40px;
+
+        .footer_left {
+            .footer__info {
+                margin-bottom: 24px;
+            }
+
+            .footer__brand {
+                display: block;
+                margin-bottom: 10px;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .footer__contact {
+                font-size: 12px;
+                line-height: 1.5;
+                letter-spacing: 0.02em;
+
+                a {
+                    color: #fff;
+                }
+            }
+        }
+
+        .footer-lost-item {
+            padding: 20px 16px;
+            border-radius: 12px;
+            background: #fff;
+            color: $text-color;
+            text-align: center;
+
+            &__title {
+                margin-bottom: 8px;
+                color: $main-color;
+                font-size: 16px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+            }
+
+            &__text {
+                margin-bottom: 16px;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.7;
+                letter-spacing: 0.03em;
+            }
+
+            &__btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 320px;
+                min-height: 56px;
+                padding: 12px 20px;
+                border-radius: 999px;
+                background: $point-color;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-decoration: none;
+            }
+        }
+
+        .footer_nav {
+            display: none;
+        }
+    }
+
+    .footer_bottom {
+        padding: 2rem 0;
+        font-size: 12px;
+        text-align: center;
+    }
+}
