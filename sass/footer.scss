@@ -36,6 +36,13 @@
                 a {
                     color: #fff;
                 }
+
+                p:nth-child(3) {
+                    span {
+                        display: inline-block;
+                        margin-left: 3.3px;
+                    }
+                }
             }
         }
 
