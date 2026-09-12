@@ -97,20 +97,30 @@
 
         #g-nav-list {
             width: 100%;
-
             ul {
                 position: static;
                 display: flex;
                 justify-content: flex-end;
                 flex-wrap: wrap;
-                gap: 10px 22px;
+                gap: 10px 0;
                 max-width: 920px;
                 margin-left: auto;
             }
         }
 
         #g-nav li {
+            display: flex;
+            align-items: center;
             text-align: left;
+            &+li::before {
+                content: "";
+                display: block;
+                flex-shrink: 0;
+                width: 1px;
+                height: 14px;
+                margin: 0 11px;
+                background: rgba(255, 255, 255, 0.7);
+            }
         }
 
         #g-nav li a {

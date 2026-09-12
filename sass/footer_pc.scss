@@ -10,7 +10,6 @@
             padding: 0 80px;
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 120px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -78,7 +77,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
-                flex: 0 1 48%;
+                flex: 0 1 70%;
             }
 
             .footer_list_1,
@@ -88,6 +87,7 @@
                 }
 
                 li a {
+                    display: block;
                     position: relative;
                     padding-left: 60px;
                     color: #fff;
@@ -97,6 +97,7 @@
                     transition: opacity 0.3s ease;
 
                     &::before {
+                        display: block;
                         content: "";
                         position: absolute;
                         left: 0;
